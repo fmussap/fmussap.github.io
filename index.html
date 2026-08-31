@@ -1,0 +1,321 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="afnextgames — a tiny independent game studio. Bento Grid: Kawaii Kitchen and Capsule Kaiju: Toy Tower.">
+<title>afnextgames</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Mochiy+Pop+One&family=Zen+Maru+Gothic:wght@400;500;700&display=swap">
+<style>
+  :root {
+    --ground: #FBF7EF;
+    --ground-grain: #F3ECDD;
+    --ink: #2B2320;
+    --ink-soft: #6A5F55;
+    --tray: #EBE2CE;
+    --tray-edge: #DDD0B4;
+    --accent: #E0503B;
+    --accent-2: #3F7D6E;
+    --gold: #C4923A;
+    --shadow: 43 35 32;
+  }
+  :root:not([data-theme="light"]) {
+    color-scheme: light;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      color-scheme: dark;
+      --ground: #1C1815;
+      --ground-grain: #221D19;
+      --ink: #EFE6D6;
+      --ink-soft: #A79A88;
+      --tray: #2A2420;
+      --tray-edge: #3A3128;
+      --accent: #F0664F;
+      --accent-2: #6BAE9C;
+      --gold: #CB9C48;
+      --shadow: 0 0 0;
+    }
+  }
+  :root[data-theme="dark"] {
+    color-scheme: dark;
+    --ground: #1C1815;
+    --ground-grain: #221D19;
+    --ink: #EFE6D6;
+    --ink-soft: #A79A88;
+    --tray: #2A2420;
+    --tray-edge: #3A3128;
+    --accent: #F0664F;
+    --accent-2: #6BAE9C;
+    --gold: #CB9C48;
+    --shadow: 0 0 0;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background-color: var(--ground);
+    background-image:
+      radial-gradient(circle at 12% 18%, var(--ground-grain) 0, transparent 45%),
+      radial-gradient(circle at 88% 8%, var(--ground-grain) 0, transparent 40%),
+      radial-gradient(circle at 70% 92%, var(--ground-grain) 0, transparent 50%);
+    color: var(--ink);
+    font-family: "Zen Maru Gothic", ui-rounded, "Hiragino Maru Gothic ProN", system-ui, sans-serif;
+    font-weight: 400;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .wrap {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: clamp(28px, 7vw, 72px) clamp(18px, 5vw, 32px) 48px;
+  }
+
+  /* ---- masthead ---- */
+  .mast {
+    text-align: center;
+    margin-bottom: clamp(32px, 6vw, 52px);
+  }
+  .mark {
+    width: 74px;
+    height: 74px;
+    margin: 0 auto 18px;
+    display: block;
+  }
+  .studio {
+    font-family: "Mochiy Pop One", "Zen Maru Gothic", sans-serif;
+    font-size: clamp(2.1rem, 8vw, 3.1rem);
+    line-height: 1.05;
+    margin: 0;
+    letter-spacing: -0.01em;
+    text-wrap: balance;
+  }
+  .studio .af { color: var(--accent); }
+  .tagline {
+    margin: 14px auto 0;
+    max-width: 42ch;
+    color: var(--ink-soft);
+    font-size: 1.02rem;
+    text-wrap: balance;
+  }
+
+  /* ---- the tray ---- */
+  .tray {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 3px;
+    padding: 3px;
+    background: var(--gold);
+    border-radius: 22px;
+    box-shadow:
+      0 1px 0 rgb(var(--shadow) / 0.04),
+      0 18px 40px -24px rgb(var(--shadow) / 0.45);
+  }
+  .cell {
+    background: var(--tray);
+    padding: clamp(20px, 4vw, 30px);
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    min-height: 0;
+  }
+  .cell:nth-child(1) { border-radius: 20px 20px 4px 4px; }
+  .cell:nth-child(2) { border-radius: 20px 20px 4px 4px; }
+  .cell:nth-child(3) { border-radius: 4px 4px 4px 4px; }
+  .cell.full {
+    grid-column: 1 / -1;
+    border-radius: 4px 4px 20px 20px;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 10px 20px;
+  }
+
+  .game-top {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .cap {
+    width: 58px;
+    height: 58px;
+    border-radius: 15px;
+    flex-shrink: 0;
+    object-fit: cover;
+    border: 1px solid var(--tray-edge);
+    box-shadow: inset 0 0 0 3px var(--tray), 0 4px 12px -6px rgb(var(--shadow) / 0.4);
+  }
+  .game-name {
+    font-family: "Mochiy Pop One", "Zen Maru Gothic", sans-serif;
+    font-size: 1.16rem;
+    line-height: 1.25;
+    margin: 0;
+  }
+  .game-sub {
+    font-size: 0.82rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    margin: 2px 0 0;
+  }
+  .blurb {
+    margin: 0;
+    font-size: 0.96rem;
+    color: var(--ink);
+    flex-grow: 1;
+  }
+
+  .chip {
+    align-self: flex-start;
+    font-size: 0.74rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    padding: 4px 11px;
+    border-radius: 999px;
+    border: 1.5px solid currentColor;
+  }
+  .chip.soon { color: var(--accent); }
+  .chip.dev { color: var(--accent-2); }
+
+  .links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 18px;
+    margin-top: auto;
+    padding-top: 4px;
+    font-size: 0.9rem;
+  }
+  .links a {
+    color: var(--ink);
+    text-decoration: none;
+    border-bottom: 2px solid var(--gold);
+    padding-bottom: 1px;
+    transition: color .16s ease, border-color .16s ease;
+  }
+  .links a:hover,
+  .links a:focus-visible { color: var(--accent); border-color: var(--accent); }
+  .links a::after { content: " \2197"; font-size: 0.85em; color: var(--ink-soft); }
+  .links a.plain::after { content: ""; }
+
+  /* footer cell */
+  .foot-txt { display: flex; flex-direction: column; gap: 2px; }
+  .foot-txt strong {
+    font-family: "Mochiy Pop One", sans-serif;
+    font-weight: 400;
+    font-size: 0.98rem;
+  }
+  .foot-txt span { font-size: 0.85rem; color: var(--ink-soft); }
+  .foot-mail {
+    font-size: 0.92rem;
+    color: var(--ink);
+    text-decoration: none;
+    border-bottom: 2px solid var(--accent);
+    padding-bottom: 1px;
+  }
+  .foot-mail:hover, .foot-mail:focus-visible { color: var(--accent); }
+
+  .colophon {
+    text-align: center;
+    margin-top: 26px;
+    font-size: 0.78rem;
+    color: var(--ink-soft);
+    letter-spacing: 0.04em;
+  }
+
+  /* motion */
+  .cell { opacity: 0; transform: translateY(14px); animation: rise .55s cubic-bezier(.2,.7,.3,1) forwards; }
+  .cell:nth-child(1) { animation-delay: .05s; }
+  .cell:nth-child(2) { animation-delay: .13s; }
+  .cell:nth-child(3) { animation-delay: .21s; }
+  .cell:nth-child(4) { animation-delay: .29s; }
+  .mark { animation: rise .6s ease forwards; }
+  @keyframes rise { to { opacity: 1; transform: none; } }
+
+  .cell { transition: transform .18s ease; }
+  .tray:hover .cell:hover { transform: translateY(-3px); }
+
+  @media (prefers-reduced-motion: reduce) {
+    .cell, .mark { animation: none; opacity: 1; transform: none; }
+    .tray:hover .cell:hover { transform: none; }
+  }
+
+  @media (max-width: 560px) {
+    .tray { grid-template-columns: 1fr; }
+    .cell, .cell.full { border-radius: 6px !important; }
+    .cell:first-child { border-radius: 20px 20px 6px 6px !important; }
+    .cell:last-child { border-radius: 6px 6px 20px 20px !important; }
+    .cell.full { flex-direction: column; align-items: flex-start; }
+  }
+</style>
+
+</head>
+<body>
+<div class="wrap">
+  <header class="mast">
+    <svg class="mark" viewBox="0 0 64 64" fill="none" aria-hidden="true">
+      <rect x="6" y="14" width="52" height="40" rx="9" fill="var(--accent)"/>
+      <rect x="6" y="14" width="52" height="40" rx="9" stroke="var(--ink)" stroke-width="2.5"/>
+      <line x1="32" y1="15" x2="32" y2="53" stroke="var(--ink)" stroke-width="2.5"/>
+      <line x1="7" y1="34" x2="57" y2="34" stroke="var(--ink)" stroke-width="2.5"/>
+      <circle cx="20" cy="24.5" r="4.2" fill="var(--gold)"/>
+      <rect x="38" y="20.5" width="12" height="8" rx="2.5" fill="var(--accent-2)"/>
+      <path d="M16 42h9M42 42h6M42 47h9" stroke="var(--ground)" stroke-width="3" stroke-linecap="round"/>
+      <path d="M26 6c-2 2.5-2 4.5 0 7M34 4c-2 3-2 5 0 8M42 6c-1.6 2.2-1.6 4 0 6.5"
+            stroke="var(--ink-soft)" stroke-width="2.2" stroke-linecap="round" opacity="0.7"/>
+    </svg>
+    <h1 class="studio"><span class="af">af</span>nextgames</h1>
+    <p class="tagline">A tiny studio making cozy, fiddly little games you can hold in one hand.</p>
+  </header>
+
+  <main class="tray">
+    <section class="cell">
+      <div class="game-top">
+        <img class="cap" src="assets/bento-grid.png" alt="Bento Grid: Kawaii Kitchen app icon" width="58" height="58">
+        <div>
+          <h2 class="game-name">Bento&nbsp;Grid</h2>
+          <p class="game-sub">Kawaii Kitchen</p>
+        </div>
+      </div>
+      <span class="chip soon">Coming soon</span>
+      <p class="blurb">A cozy block-fitting puzzle. Pack lunchboxes across five regions of Japan, clear the compartments, and keep the orders moving before the rush catches up.</p>
+      <div class="links">
+        <a href="https://play.google.com/store/apps/details?id=com.bentogrid.kawaiikitchen">Google&nbsp;Play</a>
+        <a class="plain" href="https://fmussap.github.io/bento-grid-privacy/">Privacy</a>
+      </div>
+    </section>
+
+    <section class="cell">
+      <div class="game-top">
+        <img class="cap" src="assets/capsule-kaiju.png" alt="Capsule Kaiju: Toy Tower app icon" width="58" height="58">
+        <div>
+          <h2 class="game-name">Capsule&nbsp;Kaiju</h2>
+          <p class="game-sub">Toy Tower</p>
+        </div>
+      </div>
+      <span class="chip dev">In development</span>
+      <p class="blurb">Stack a wobbling tower of gachapon monsters. Every capsule you crack open is a new little beast with its own centre of gravity.</p>
+      <div class="links">
+        <a class="plain" href="https://fmussap.github.io/capsule-kaiju-privacy/">Privacy</a>
+      </div>
+    </section>
+
+    <section class="cell full">
+      <div class="foot-txt">
+        <strong>afnextgames</strong>
+        <span>An independent games studio.</span>
+      </div>
+      <a class="foot-mail" href="mailto:fabiomussap@gmail.com">fabiomussap@gmail.com</a>
+    </section>
+  </main>
+
+  <p class="colophon">&copy; 2026 afnextgames</p>
+</div>
+
+</body>
+</html>
