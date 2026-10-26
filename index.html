@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="afnextgames — a tiny independent game studio. Bento Grid: Kawaii Kitchen and Capsule Kaiju: Toy Tower.">
+<meta name="description" content="afnextgames — a tiny independent game studio. Bento Grid: Kawaii Kitchen, Capsule Kaiju: Toy Tower and Cozy Grind: Cafe Barista.">
 <title>afnextgames</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -126,6 +126,7 @@
   .cell:nth-child(1) { border-radius: 20px 20px 4px 4px; }
   .cell:nth-child(2) { border-radius: 20px 20px 4px 4px; }
   .cell:nth-child(3) { border-radius: 4px 4px 4px 4px; }
+  .cell.wide { grid-column: 1 / -1; }
   .cell.full {
     grid-column: 1 / -1;
     border-radius: 4px 4px 20px 20px;
@@ -181,7 +182,8 @@
     border: 1.5px solid currentColor;
   }
   .chip.soon { color: var(--accent); }
-  .chip.dev { color: var(--accent-2); }
+  .chip.live { color: var(--accent-2); }
+  .chip.dev { color: var(--gold); }
 
   .links {
     display: flex;
@@ -234,6 +236,7 @@
   .cell:nth-child(2) { animation-delay: .13s; }
   .cell:nth-child(3) { animation-delay: .21s; }
   .cell:nth-child(4) { animation-delay: .29s; }
+  .cell:nth-child(5) { animation-delay: .37s; }
   .mark { animation: rise .6s ease forwards; }
   @keyframes rise { to { opacity: 1; transform: none; } }
 
@@ -282,7 +285,7 @@
           <p class="game-sub">Kawaii Kitchen</p>
         </div>
       </div>
-      <span class="chip soon">Coming soon</span>
+      <span class="chip live">Out now</span>
       <p class="blurb">A cozy block-fitting puzzle. Pack lunchboxes across five regions of Japan, clear the compartments, and keep the orders moving before the rush catches up.</p>
       <div class="links">
         <a href="https://play.google.com/store/apps/details?id=com.bentogrid.kawaiikitchen">Google&nbsp;Play</a>
@@ -298,11 +301,24 @@
           <p class="game-sub">Toy Tower</p>
         </div>
       </div>
-      <span class="chip dev">In development</span>
-      <p class="blurb">Stack a wobbling tower of gachapon monsters. Every capsule you crack open is a new little beast with its own centre of gravity.</p>
+      <span class="chip live">Out now</span>
+      <p class="blurb">Drop gachapon capsules into a vending-machine tank and merge matching kaiju into bigger ones. Four worlds, each with its own weather and hazards, and an endless tower that only ends when it reaches the lid.</p>
       <div class="links">
+        <a href="https://play.google.com/store/apps/details?id=com.afnextgames.capsulekaiju">Google&nbsp;Play</a>
         <a class="plain" href="https://fmussap.github.io/capsule-kaiju-privacy/">Privacy</a>
       </div>
+    </section>
+
+    <section class="cell wide">
+      <div class="game-top">
+        <img class="cap" src="assets/cozy-grind.png" alt="Cozy Grind: Cafe Barista app icon" width="58" height="58">
+        <div>
+          <h2 class="game-name">Cozy&nbsp;Grind</h2>
+          <p class="game-sub">Cafe Barista</p>
+        </div>
+      </div>
+      <span class="chip dev">In development</span>
+      <p class="blurb">Run a little café: customers order drinks, you pour them against the clock, and the coins buy new stock, machines and places to open next.</p>
     </section>
 
     <section class="cell full">
