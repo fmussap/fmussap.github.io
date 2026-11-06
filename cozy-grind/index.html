@@ -1,0 +1,303 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cozy Grind: Cafe Barista</title>
+<meta name="description" content="Pour coffee in 3D, serve the line and grow a street stall into a flagship café. A cozy barista game by afnextgames, coming soon to Google Play.">
+<meta name="theme-color" content="#3F7D6E">
+<link rel="icon" href="img/icon.png">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Cozy Grind: Cafe Barista">
+<meta property="og:description" content="Pour coffee in 3D, serve the line and grow a street stall into a flagship café. Coming soon to Google Play.">
+<meta property="og:image" content="https://fmussap.github.io/cozy-grind/img/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:url" content="https://fmussap.github.io/cozy-grind/">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Mochiy+Pop+One&family=Zen+Maru+Gothic:wght@400;500;700&display=swap">
+<style>
+  :root {
+    --ground: #FBF7EF;
+    --ground-grain: #F3ECDD;
+    --ink: #2B2320;
+    --ink-soft: #6A5F55;
+    --tray: #EBE2CE;
+    --tray-edge: #DDD0B4;
+    --accent: #E0503B;
+    --green: #3F7D6E;
+    --green-ink: #FFFFFF;
+    --gold: #C4923A;
+    --shadow: 43 35 32;
+  }
+  :root:not([data-theme="light"]) { color-scheme: light; }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      color-scheme: dark;
+      --ground: #1C1815;
+      --ground-grain: #221D19;
+      --ink: #EFE6D6;
+      --ink-soft: #A79A88;
+      --tray: #2A2420;
+      --tray-edge: #3A3128;
+      --accent: #F0664F;
+      --green: #6BAE9C;
+      --green-ink: #10201B;
+      --gold: #CB9C48;
+      --shadow: 0 0 0;
+    }
+  }
+  :root[data-theme="dark"] {
+    color-scheme: dark;
+    --ground: #1C1815;
+    --ground-grain: #221D19;
+    --ink: #EFE6D6;
+    --ink-soft: #A79A88;
+    --tray: #2A2420;
+    --tray-edge: #3A3128;
+    --accent: #F0664F;
+    --green: #6BAE9C;
+    --green-ink: #10201B;
+    --gold: #CB9C48;
+    --shadow: 0 0 0;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background-color: var(--ground);
+    background-image:
+      radial-gradient(circle at 12% 18%, var(--ground-grain) 0, transparent 45%),
+      radial-gradient(circle at 88% 8%, var(--ground-grain) 0, transparent 40%),
+      radial-gradient(circle at 70% 92%, var(--ground-grain) 0, transparent 50%);
+    color: var(--ink);
+    font-family: "Zen Maru Gothic", ui-rounded, "Hiragino Maru Gothic ProN", system-ui, sans-serif;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .wrap {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: clamp(18px, 4vw, 36px) clamp(18px, 5vw, 32px) 48px;
+  }
+
+  .back {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.92rem;
+    color: var(--ink-soft);
+    text-decoration: none;
+  }
+  .back:hover, .back:focus-visible { color: var(--accent); }
+  .back b { font-family: "Mochiy Pop One", "Zen Maru Gothic", sans-serif; font-weight: 400; }
+  .back b span { color: var(--accent); }
+
+  h1, h2, h3 { font-family: "Mochiy Pop One", "Zen Maru Gothic", sans-serif; font-weight: 400; text-wrap: balance; margin: 0; }
+
+  /* ---- hero ---- */
+  .hero {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 320px);
+    gap: clamp(24px, 5vw, 56px);
+    align-items: center;
+    margin: clamp(22px, 5vw, 44px) 0 clamp(36px, 7vw, 64px);
+  }
+  .title-row { display: flex; align-items: center; gap: 16px; }
+  .icon {
+    width: 84px; height: 84px; border-radius: 22px; flex-shrink: 0;
+    box-shadow: 0 10px 24px -12px rgb(var(--shadow) / 0.55);
+  }
+  .title { font-size: clamp(2rem, 6.5vw, 3rem); line-height: 1.05; }
+  .sub { margin: 4px 0 0; font-size: 0.86rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-soft); }
+  .chip {
+    display: inline-block;
+    margin-top: 20px;
+    font-size: 0.74rem; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase;
+    padding: 4px 11px; border-radius: 999px; border: 1.5px solid currentColor; color: var(--accent);
+  }
+  .lede { font-size: 1.12rem; margin: 14px 0 0; max-width: 46ch; }
+  .actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 22px; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 11px 20px; border-radius: 999px;
+    font-weight: 700; font-size: 0.95rem; text-decoration: none;
+    border: 2px solid var(--green);
+  }
+  .btn.solid { background: var(--green); color: var(--green-ink); }
+  .btn.solid[aria-disabled="true"] { opacity: 0.8; cursor: default; }
+  .btn.line { color: var(--ink); }
+  .btn.line:hover, .btn.line:focus-visible { border-color: var(--accent); color: var(--accent); }
+
+  .phone {
+    justify-self: center;
+    width: min(100%, 300px);
+    padding: 10px;
+    border-radius: 38px;
+    background: var(--gold);
+    box-shadow: 0 24px 50px -26px rgb(var(--shadow) / 0.6);
+  }
+  .phone video {
+    display: block; width: 100%; aspect-ratio: 9 / 16; max-width: 100%;
+    border-radius: 30px; background: #000; object-fit: cover;
+  }
+
+  /* ---- sections ---- */
+  section.block { margin-top: clamp(36px, 7vw, 64px); }
+  .eyebrow { font-size: 0.78rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--green); margin: 0 0 6px; }
+  .block h2 { font-size: clamp(1.4rem, 4.2vw, 1.9rem); line-height: 1.2; }
+  .block > p { max-width: 62ch; margin: 10px 0 0; color: var(--ink-soft); }
+
+  .tray {
+    display: grid;
+    gap: 3px; padding: 3px;
+    background: var(--gold);
+    border-radius: 22px;
+    margin-top: 20px;
+    box-shadow: 0 18px 40px -24px rgb(var(--shadow) / 0.45);
+  }
+  .places { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .place { background: var(--tray); margin: 0; display: flex; flex-direction: column; }
+  .place img { display: block; width: 100%; height: auto; max-width: 100%; aspect-ratio: 3 / 4; object-fit: cover; object-position: center 40%; }
+  .place figcaption { padding: 12px 14px 14px; }
+  .place .n { font-size: 0.72rem; font-weight: 700; color: var(--gold); letter-spacing: 0.08em; }
+  .place h3 { font-size: 1rem; line-height: 1.3; margin-top: 2px; }
+  .place p { margin: 4px 0 0; font-size: 0.86rem; color: var(--ink-soft); line-height: 1.5; }
+  .places .place:nth-child(1) { border-radius: 19px 4px 4px 4px; }
+  .places .place:nth-child(3) { border-radius: 4px 19px 4px 4px; }
+  .places .place:nth-child(4) { border-radius: 4px 4px 4px 19px; }
+  .places .place:nth-child(6) { border-radius: 4px 4px 19px 4px; }
+  .place { overflow: hidden; }
+
+  .craft { display: grid; grid-template-columns: minmax(0, 260px) minmax(0, 1fr); gap: clamp(20px, 4vw, 40px); align-items: center; margin-top: 20px; }
+  .craft img { width: 100%; height: auto; max-width: 100%; aspect-ratio: 3 / 4; object-fit: cover; border-radius: 22px; border: 3px solid var(--gold); }
+  .ticks { list-style: none; padding: 0; margin: 0; display: grid; gap: 10px; }
+  .ticks li { padding-left: 28px; position: relative; }
+  .ticks li::before { content: ""; position: absolute; left: 0; top: 0.45em; width: 14px; height: 14px; border-radius: 50%; background: var(--green); box-shadow: inset 0 0 0 4px var(--tray); border: 1.5px solid var(--green); }
+
+  .more { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .more .cell { background: var(--tray); padding: clamp(18px, 3vw, 24px); }
+  .more .cell:nth-child(1) { border-radius: 19px 4px 4px 19px; }
+  .more .cell:nth-child(3) { border-radius: 4px 19px 19px 4px; }
+  .more h3 { font-size: 1rem; }
+  .more p { margin: 8px 0 0; font-size: 0.92rem; }
+
+  .press { display: flex; flex-wrap: wrap; gap: 14px 28px; align-items: center; justify-content: space-between; background: var(--tray); border: 3px solid var(--gold); border-radius: 22px; padding: clamp(18px, 3vw, 26px); margin-top: 20px; }
+  .press p { margin: 0; max-width: 52ch; font-size: 0.94rem; }
+  .mail { font-weight: 700; color: var(--ink); text-decoration: none; border-bottom: 2px solid var(--gold); user-select: all; }
+
+  footer { margin-top: clamp(40px, 7vw, 64px); display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px 20px; font-size: 0.88rem; color: var(--ink-soft); }
+  footer nav { display: flex; gap: 18px; flex-wrap: wrap; }
+  footer a { color: var(--ink-soft); text-decoration: none; border-bottom: 1.5px solid var(--tray-edge); }
+  footer a:hover, footer a:focus-visible { color: var(--accent); border-color: var(--accent); }
+
+  a:focus-visible, .btn:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
+
+  @media (max-width: 720px) {
+    .hero { grid-template-columns: 1fr; }
+    .places { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .places .place { border-radius: 4px !important; }
+    .places .place:nth-child(1) { border-radius: 19px 4px 4px 4px !important; }
+    .places .place:nth-child(2) { border-radius: 4px 19px 4px 4px !important; }
+    .places .place:nth-child(5) { border-radius: 4px 4px 4px 19px !important; }
+    .places .place:nth-child(6) { border-radius: 4px 4px 19px 4px !important; }
+    .craft { grid-template-columns: 1fr; }
+    .craft img { max-width: 260px; }
+    .more { grid-template-columns: 1fr; }
+    .more .cell { border-radius: 4px !important; }
+    .more .cell:nth-child(1) { border-radius: 19px 19px 4px 4px !important; }
+    .more .cell:nth-child(3) { border-radius: 4px 4px 19px 19px !important; }
+  }
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a class="back" href="https://fmussap.github.io/">&larr; <b><span>af</span>nextgames</b></a>
+
+  <header class="hero">
+    <div>
+      <div class="title-row">
+        <img class="icon" src="img/icon.png" alt="Cozy Grind: Cafe Barista app icon" width="84" height="84">
+        <div>
+          <h1 class="title">Cozy Grind</h1>
+          <p class="sub">Cafe Barista</p>
+        </div>
+      </div>
+      <span class="chip">Coming soon to Google Play</span>
+      <p class="lede">Open a tiny coffee stall by the river and grow it, one perfect cup at a time, into the most beautiful café in town. You really make every drink: pull the shot, steam the milk, pour to the line and serve before the customer's patience runs out.</p>
+      <div class="actions">
+        <span class="btn solid" aria-disabled="true">&#9654;&nbsp; Google Play · soon</span>
+        <a class="btn line" href="#places">See the places</a>
+      </div>
+    </div>
+    <div class="phone">
+      <video src="trailer.mp4" poster="img/poster.jpg" autoplay muted loop playsinline preload="metadata" aria-label="Cozy Grind trailer: the six places and a latte being poured"></video>
+    </div>
+  </header>
+
+  <section class="block" id="places">
+    <p class="eyebrow">Six hand-crafted places</p>
+    <h2>From a street stall to a flagship café</h2>
+    <p>Each place has its own counter, music and life. Move on when you're ready, by van, train, tram, funicular and garden cart.</p>
+    <div class="tray places">
+      <figure class="place"><img src="img/stall.jpg" alt="The street stall under the trees in Riverside Park" width="720" height="1280"><figcaption><span class="n">01</span><h3>Street Stall</h3><p>Riverside Park. Where every barista starts.</p></figcaption></figure>
+      <figure class="place"><img src="img/van.jpg" alt="The orange coffee van on the seaside promenade" width="720" height="1280"><figcaption><span class="n">02</span><h3>Coffee Van</h3><p>Seaside Promenade. Bigger counter, a fridge, and the sea.</p></figcaption></figure>
+      <figure class="place"><img src="img/kiosk.jpg" alt="The green domed kiosk at Central Station" width="720" height="1280"><figcaption><span class="n">03</span><h3>Station Kiosk</h3><p>Central Station. Trains bring the rush to Platform 2.</p></figcaption></figure>
+      <figure class="place"><img src="img/cafe.jpg" alt="The corner café with a striped awning on the old-town square" width="720" height="1280"><figcaption><span class="n">04</span><h3>Neighborhood Café</h3><p>Old Town Square. A terrace, a tram and regulars.</p></figcaption></figure>
+      <figure class="place"><img src="img/hill.jpg" alt="The azulejo-tiled specialty bar beside the funicular" width="720" height="1280"><figcaption><span class="n">05</span><h3>Specialty Coffee Bar</h3><p>Funicular Hill. The whole city below.</p></figcaption></figure>
+      <figure class="place"><img src="img/glasshouse.jpg" alt="The Victorian glasshouse in a botanical garden at sunset" width="720" height="1280"><figcaption><span class="n">06</span><h3>The Glasshouse Flagship</h3><p>Botanical Garden. Roast your own beans among the palms and peacocks.</p></figcaption></figure>
+    </div>
+  </section>
+
+  <section class="block">
+    <p class="eyebrow">Make every drink by hand</p>
+    <h2>Nearly 60 drinks, poured into real 3D cups</h2>
+    <div class="craft">
+      <img src="img/latte.jpg" alt="A rosetta of latte art in a cappuccino cup" width="720" height="1280">
+      <ul class="ticks">
+        <li>Hold to pour espresso, milk, water, syrups and sauces, and watch the layers build in the cup.</li>
+        <li>Grind the beans, steam the milk and finish with latte art: a heart, a tulip, a rosetta or a swan.</li>
+        <li>Shake a Shakerato, bloom a pour-over, press an AeroPress, whisk matcha and blend frappés.</li>
+        <li>Pour it just right for a Perfect grade, bigger tips and happy regulars.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="block">
+    <p class="eyebrow">Grow at your own pace</p>
+    <h2>A cozy world that keeps you company</h2>
+    <div class="tray more">
+      <div class="cell"><h3>Upgrade your bar</h3><p>Grinders, steamers, a syrup rack, a tea bar, a blender, a gelato freezer, a roaster and a pro two-group machine. Try each upgrade on your counter before you buy it.</p></div>
+      <div class="cell"><h3>Customers with character</h3><p>Every customer has their own face and patience. Regulars collect stamps, connoisseurs want Perfect, tour groups arrive together and a food critic can make your day.</p></div>
+      <div class="cell"><h3>Days that breathe</h3><p>Soft light from morning to evening, passers-by, trains, trams and a funicular coming and going, and gentle music for every place.</p></div>
+    </div>
+  </section>
+
+  <section class="block" id="press">
+    <p class="eyebrow">Press &amp; creators</p>
+    <h2>Press kit</h2>
+    <div class="press">
+      <p>The app icon, logo, wordmark and seven 1080×1920 screenshots, free to use when writing about Cozy Grind. For anything else, write to us.</p>
+      <div class="actions" style="margin-top:0">
+        <a class="btn solid" href="cozy-grind-press-kit.zip" download>Download press kit · 3.4 MB</a>
+      </div>
+      <p>Contact: <span class="mail">afnextgames@gmail.com</span></p>
+    </div>
+  </section>
+
+  <footer>
+    <span>&copy; 2026 afnextgames · Ireland</span>
+    <nav aria-label="Legal">
+      <a href="https://fmussap.github.io/cozy-grind-privacy/">Privacy</a>
+      <a href="https://fmussap.github.io/cozy-grind-privacy/terms.html">Terms</a>
+      <a href="https://fmussap.github.io/">All games</a>
+    </nav>
+  </footer>
+</div>
+</body>
+</html>
